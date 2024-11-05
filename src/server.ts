@@ -1,16 +1,19 @@
 import Fastify from "fastify";
+import { routes } from "./routes";
 
 const fastify = Fastify({
   logger: true,
 });
 
-fastify.get("/", (request, reply) => {
-  reply.send({ message: "Hello World from Fastify" });
-});
+fastify.register(routes);
 
-fastify.listen({ port: 3001 }, function (error, address) {
-  if (error) {
+const start = async () => {
+  try {
+    await fastify.listen({ port: 3001, host: "0.0.0.0" });
+  } catch (error) {
     fastify.log.error(error);
     process.exit(1);
   }
-});
+};
+
+start();
