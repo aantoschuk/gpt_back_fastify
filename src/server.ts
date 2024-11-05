@@ -1,4 +1,5 @@
 import "dotenv/config";
+import cors from "@fastify/cors";
 
 import Fastify from "fastify";
 
@@ -8,6 +9,7 @@ const fastify = Fastify({
   logger: true,
 });
 
+fastify.register(cors);
 fastify.register(routes);
 
 const start = async () => {

@@ -6,8 +6,8 @@ interface IBody {
 }
 
 const openai = new OpenAI({
-  organization: "org-IkSc0QpF7P3UbCQxLcpX93mq",
   apiKey: process.env.OPEN_AI_API_KEY,
+  organization: process.env.OPEN_AI_ORGANIZATION_ID,
 });
 
 // This is the only model which i allow for default-project
@@ -38,4 +38,8 @@ export const routes = async (server: FastifyInstance, options: {}) => {
       }
     }
   );
+
+  server.get("/", async (request: FastifyRequest, reply: FastifyReply) => {
+    reply.send({ message: "Hello World" });
+  });
 };
